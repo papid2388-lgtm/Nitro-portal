@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitro Portal</title>
+    <style>
+        /* Clean, Modern, Normal Weight Styling */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Subtle "Life" Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
+            z-index: -1;
+            animation: pulseBg 8s infinite alternate;
+        }
+
+        @keyframes pulseBg {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .nitro-header {
+            font-size: 36px;
+            font-weight: 300; /* Light/Normal weight */
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .portal-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            width: 340px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .info-text {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            background: #111;
+            border: 1px solid #222;
+            color: #fff;
+            font-size: 14px;
+            border-radius: 2px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #555;
+            background: #151515;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 2px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #cccccc;
+        }
+
+        /* Error Message Style */
+        #error-msg {
+            color: #ff5555;
+            font-size: 12px;
+            margin-bottom: 15px;
+            display: none;
+            line-height: 1.4;
+        }
+
+        /* Coming Soon State */
+        #coming-soon {
+            display: none;
+        }
+
+        .cs-title {
+            font-size: 22px;
+            letter-spacing: 5px;
+            font-weight: 300;
+            color: #ffffff;
+        }
+
+        .loading-line {
+            width: 60px;
+            height: 1px;
+            background: #fff;
+            margin: 20px auto;
+            animation: lineExpand 2s infinite;
+        }
+
+        @keyframes lineExpand {
+            0% { width: 0; opacity: 0; }
+            50% { width: 100px; opacity: 1; }
+            100% { width: 0; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg"></div>
+
+    <h1 class="nitro-header">Nitro</h1>
+
+    <div class="portal-card" id="login-box">
+        <p class="info-text">SECURE TERMINAL LOGIN</p>
+        <div id="error-msg"></div>
+        <form onsubmit="handleValidation(event)">
+            <input type="text" id="phone" placeholder="Phone Number" required>
+            <input type="email" id="email" placeholder="Gmail Address (@gmail.com)" required>
+            <input type="password" id="pass" placeholder="Password" required>
+            <button type="submit" class="login-btn">Sign In</button>
+        </form>
+    </div>
+
+    <div class="portal-card" id="coming-soon">
+        <div class="loading-line"></div>
+        <h2 class="cs-title">COMING SOON</h2>
+        <p class="info-text" style="margin-top: 15px;">Access Granted. Deployment starting shortly.</p>
+    </div>
+
+    <script>
+        function handleValidation(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('pass').value;
+            const errorElement = document.getElementById('error-msg');
+            
+            // 1. Check if email ends with @gmail.com
+            if (!email.toLowerCase().endsWith('@gmail.com')) {
+                errorElement.innerText = "Access Denied: Only @gmail.com accounts are permitted.";
+                errorElement.style.display = "block";
+                return;
+            }
+
+            // 2. Check Password
+            if (password !== "171817") {
+                errorElement.innerText = "Access Denied: Invalid Password.";
+                errorElement.style.display = "block";
+                return;
+            }
+
+            // Success
+            errorElement.style.display = "none";
+            document.getElementById('login-box').style.display = "none";
+            document.getElementById('coming-soon').style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
