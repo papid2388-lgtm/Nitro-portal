@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nitro Portal</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",Roboto,Arial;
+}
+
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#050505;
+color:white;
+overflow:hidden;
+}
+
+/* Animated Background */
+
+.bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle at center,#1a1a1a,#000);
+animation:bgPulse 10s infinite alternate;
+z-index:-1;
+}
+
+@keyframes bgPulse{
+0%{opacity:.7;}
+100%{opacity:1;}
+}
+
+/* Logo */
+
+.logo{
+position:absolute;
+top:40px;
+font-size:32px;
+letter-spacing:12px;
+font-weight:300;
+}
+
+/* Card */
+
+.card{
+width:360px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.1);
+padding:40px;
+border-radius:8px;
+backdrop-filter:blur(10px);
+box-shadow:0 20px 60px rgba(0,0,0,.6);
+animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.info{
+font-size:12px;
+color:#888;
+margin-bottom:20px;
+letter-spacing:2px;
+}
+
+/* Inputs */
+
+input{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+background:#0f0f0f;
+border:1px solid #222;
+border-radius:4px;
+color:white;
+font-size:14px;
+transition:.3s;
+}
+
+input:focus{
+border-color:#888;
+background:#151515;
+outline:none;
+}
+
+/* Button */
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:4px;
+background:white;
+color:black;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#dcdcdc;
+}
+
+/* Error */
+
+#error{
+color:#ff5b5b;
+font-size:12px;
+margin-bottom:10px;
+display:none;
+}
+
+/* Coming Soon */
+
+#coming{
+display:none;
+text-align:center;
+}
+
+.loading{
+height:2px;
+width:0;
+background:white;
+margin:20px auto;
+animation:load 2s infinite;
+}
+
+@keyframes load{
+0%{width:0;opacity:0;}
+50%{width:120px;opacity:1;}
+100%{width:0;opacity:0;}
+}
+
+.title{
+letter-spacing:6px;
+font-weight:300;
+font-size:22px;
+}
+
+/* Footer */
+
+.footer{
+position:absolute;
+bottom:20px;
+font-size:11px;
+color:#666;
+letter-spacing:2px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="logo">NITRO</div>
+
+<div class="card" id="login">
+
+<p class="info">SECURE TERMINAL LOGIN</p>
+
+<div id="error"></div>
+
+<form onsubmit="login(event)">
+
+<input type="text" placeholder="Phone Number" required>
+
+<input type="email" id="email" placeholder="Gmail Address" required>
+
+<input type="password" id="pass" placeholder="Password" required>
+
+<button>Sign In</button>
+
+</form>
+
+</div>
+
+
+<div class="card" id="coming">
+
+<div class="loading"></div>
+
+<div class="title">COMING SOON</div>
+
+<p style="margin-top:15px;color:#888;font-size:13px">
+Access granted. Deployment starting shortly.
+</p>
+
+</div>
+
+<div class="footer">
+Nitro Secure Systems • 2026
+</div>
+
+
+<script>
+
+function login(e){
+
+e.preventDefault()
+
+let email=document.getElementById("email").value
+let pass=document.getElementById("pass").value
+let error=document.getElementById("error")
+
+if(!email.toLowerCase().endsWith("@gmail.com")){
+error.style.display="block"
+error.innerText="Only @gmail.com accounts are allowed."
+return
+}
+
+if(pass!=="171817"){
+error.style.display="block"
+error.innerText="Invalid password."
+return
+}
+
+document.getElementById("login").style.display="none"
+document.getElementById("coming").style.display="block"
+
+}
+
+</script>
+
+</body>
+</html>
